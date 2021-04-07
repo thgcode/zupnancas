@@ -20,4 +20,9 @@ public class CreditoController {
     public Credito cadastrarCredito(@RequestBody @Valid CadastroDeCreditoDTO dto) {
         return creditoService.cadastrarCredito(dto.converterParaCredito());
     }
+
+    @GetMapping
+    public Iterable <Credito> listarTodosOsCreditos() {
+        return creditoService.listarTodosOsCreditos();
+    }
 }
