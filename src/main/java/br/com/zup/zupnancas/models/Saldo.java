@@ -10,16 +10,16 @@ public class Saldo {
     @Id
     private String cpf;
 
-    private double saldo;
+    private double valor;
 
     private double limite;
 
     public Saldo() {
     }
 
-    public Saldo(String cpf, double saldo, double limite) {
+    public Saldo(String cpf, double limite) {
         this.cpf = cpf;
-        this.saldo = saldo;
+        this.valor = 0.0;
         this.limite = limite;
     }
 
@@ -31,12 +31,12 @@ public class Saldo {
         this.cpf = cpf;
     }
 
-    public double getSaldo() {
-        return saldo;
+    public double getValor() {
+        return valor;
     }
 
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public double getLimite() {

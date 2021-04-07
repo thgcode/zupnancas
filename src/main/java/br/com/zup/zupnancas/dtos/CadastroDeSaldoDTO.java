@@ -12,8 +12,6 @@ public class CadastroDeSaldoDTO {
     @NotNull
     private String cpf;
 
-    private double valor;
-
     @PositiveOrZero
     private double limite;
 
@@ -22,7 +20,6 @@ public class CadastroDeSaldoDTO {
 
     public CadastroDeSaldoDTO(@CPF @NotNull String cpf, double valor, @PositiveOrZero double limite) {
         this.cpf = cpf;
-        this.valor = valor;
         this.limite = limite;
     }
 
@@ -34,14 +31,6 @@ public class CadastroDeSaldoDTO {
         this.cpf = cpf;
     }
 
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
     public double getLimite() {
         return limite;
     }
@@ -51,6 +40,6 @@ public class CadastroDeSaldoDTO {
     }
 
     public Saldo converterParaSaldo() {
-        return new Saldo(cpf, valor, limite);
+        return new Saldo(cpf, limite);
     }
 }
