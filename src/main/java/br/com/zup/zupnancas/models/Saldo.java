@@ -17,6 +17,12 @@ public class Saldo {
     public Saldo() {
     }
 
+    public Saldo(String cpf, double saldo, double limite) {
+        this.cpf = cpf;
+        this.saldo = saldo;
+        this.limite = limite;
+    }
+
     public String getCpf() {
         return cpf;
     }
