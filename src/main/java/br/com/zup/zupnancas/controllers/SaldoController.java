@@ -4,6 +4,7 @@ import br.com.zup.zupnancas.dtos.CadastroDeSaldoDTO;
 import br.com.zup.zupnancas.models.Saldo;
 import br.com.zup.zupnancas.services.SaldoService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class SaldoController {
     }
 
     @PostMapping
-    public Saldo cadastrarSaldo(@Valid CadastroDeSaldoDTO dto) {
+    public Saldo cadastrarSaldo(@Valid @RequestBody CadastroDeSaldoDTO dto) {
         return saldoService.cadastrarSaldo(dto.converterParaSaldo());
     }
 }
