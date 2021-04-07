@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.dtos;
 
+import br.com.zup.zupnancas.models.Saldo;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotEmpty;
@@ -47,5 +48,9 @@ public class CadastroDeSaldoDTO {
 
     public void setLimite(double limite) {
         this.limite = limite;
+    }
+
+    public Saldo converterParaSaldo() {
+        return new Saldo(cpf, valor, limite);
     }
 }
