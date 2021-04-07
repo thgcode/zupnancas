@@ -1,5 +1,7 @@
 package br.com.zup.zupnancas.dtos;
 
+import br.com.zup.zupnancas.models.Conta;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -46,5 +48,9 @@ public class CadastroDeContaDTO {
 
     public void setDataDeVencimento(LocalDate dataDeVencimento) {
         this.dataDeVencimento = dataDeVencimento;
+    }
+
+    public Conta converterParaConta() {
+        return new Conta(0, descricao, 0.0, null, dataDeVencimento, null);
     }
 }

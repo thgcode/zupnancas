@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ContaService {
-    public ContaRepository contaRepository;
+    private ContaRepository contaRepository;
 
     public ContaService(ContaRepository contaRepository) {
         this.contaRepository = contaRepository;
