@@ -12,14 +12,17 @@ public class Credito {
 
     private String descricao;
 
+    private double valor;
+
     private LocalDate dataDeEntrada;
 
     public Credito() {
     }
 
-    public Credito(int id, String descricao, LocalDate dataDeEntrada) {
+    public Credito(int id, String descricao, double valor, LocalDate dataDeEntrada) {
         this.id = id;
         this.descricao = descricao;
+        this.valor = valor;
         this.dataDeEntrada = dataDeEntrada;
     }
 
@@ -37,6 +40,14 @@ public class Credito {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public LocalDate getDataDeEntrada() {
