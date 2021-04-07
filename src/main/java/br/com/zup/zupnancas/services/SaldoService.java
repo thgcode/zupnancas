@@ -13,7 +13,7 @@ public class SaldoService {
     }
 
     public Saldo cadastrarSaldo(Saldo saldo) {
-        return saldoRepository.save(saldo)
+        return saldoRepository.save(saldo);
     }
 
     public Iterable <Saldo> listarTodosOsSaldos() {

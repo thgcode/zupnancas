@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("saldos/")
 public class SaldoController {
@@ -17,7 +19,7 @@ public class SaldoController {
     }
 
     @PostMapping
-    public Saldo cadastrarSaldo(CadastroDeSaldoDTO dto) {
+    public Saldo cadastrarSaldo(@Valid CadastroDeSaldoDTO dto) {
         return saldoService.cadastrarSaldo(dto.converterParaSaldo());
     }
 }
