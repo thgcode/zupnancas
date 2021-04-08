@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.services;
 
+import br.com.zup.zupnancas.exceptions.CreditoNaoEncontradoException;
 import br.com.zup.zupnancas.models.CategoriaCredito;
 import br.com.zup.zupnancas.models.Credito;
 import br.com.zup.zupnancas.repositories.CreditoRepository;
@@ -38,7 +39,7 @@ public class CreditoService {
             return optionalCredito.get();
         }
 
-        return null; // Gerar exceção
+        throw new CreditoNaoEncontradoException();
     }
 
     public Credito adicionarCreditoNaCategoria(Credito credito, CategoriaCredito categoria) {
