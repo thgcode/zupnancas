@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.services;
 
+import br.com.zup.zupnancas.exceptions.CategoriaNaoEncontradaException;
 import br.com.zup.zupnancas.models.CategoriaCredito;
 import br.com.zup.zupnancas.repositories.CategoriaRepository;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,6 @@ public class CategoriaService {
             return optionalCategoria.get();
         }
 
-        return null; // Gerar exceção
-    }
+        throw new CategoriaNaoEncontradaException();
+        }
 }
