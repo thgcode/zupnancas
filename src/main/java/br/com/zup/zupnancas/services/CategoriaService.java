@@ -16,7 +16,7 @@ public class CategoriaService {
         return categoriaRepository.save(categoria);
     }
 
-    public Iterable <CategoriaConta> listarContas() {
+    public Iterable <CategoriaConta> listarCategorias() {
         return categoriaRepository.findAll();
     }
 }

@@ -22,4 +22,9 @@ public class CategoriaController {
     public CategoriaConta cadastrarCategoria(@Valid @RequestBody CadastrarCategoriaDTO dto) {
         return categoriaService.cadastrarCategoria(dto.converterParaCategoriaConta());
     }
+
+    @GetMapping
+    public Iterable <CategoriaConta> visualizarCategoriasCadastradas() {
+        return categoriaService.listarCategorias();
+    }
 }
