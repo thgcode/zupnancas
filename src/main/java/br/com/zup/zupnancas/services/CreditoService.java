@@ -42,6 +42,6 @@ public class CreditoService {
         Credito creditoDoBanco = pesquisarCreditoPeloId(credito.getId());
 
         creditoDoBanco.getCategorias().add(categoriaDoBanco);
-        return creditoRepository.save(credito);
+        return creditoRepository.save(creditoDoBanco);
     }
 }
