@@ -8,7 +8,7 @@ public class CadastrarCategoriaDTO {
     @NotEmpty
     private String nome;
 
-    public cadastrarCategoriaDTO() {
+    public CadastrarCategoriaDTO() {
     }
 
     public CadastrarCategoriaDTO(String nome) {
