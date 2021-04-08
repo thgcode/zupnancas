@@ -27,6 +27,10 @@ public class CreditoService {
         return creditoRepository.findAll();
     }
 
+    public Iterable <Credito> listarCreditosPeloIdDaCategoria(int id) {
+        return creditoRepository.findAllByCategoriasId(id);
+    }
+
     public Credito pesquisarCreditoPeloId(int id) {
         Optional <Credito> optionalCredito = creditoRepository.findById(id);
 

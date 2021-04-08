@@ -31,4 +31,9 @@ public class CreditoController {
     public Credito adicionarCreditoNaCategoria(@Valid @RequestBody AdicionarCategoriaNoCreditoDTO dto) {
         return creditoService.adicionarCreditoNaCategoria(dto.converterParaCredito(), dto.converterParaCategoria());
     }
+
+    @GetMapping("categorias/{id}/")
+    public Iterable <Credito> listarCreditosPeloIdDaCategoria(@PathVariable int id) {
+        return creditoService.listarCreditosPeloIdDaCategoria(id);
+    }
 }
