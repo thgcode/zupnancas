@@ -3,7 +3,7 @@ package br.com.zup.zupnancas.exceptions;
 import org.springframework.http.HttpStatus;
 
 public class ErroDoSistema extends RuntimeException {
-    public HttpStatus status;
+    private HttpStatus status;
     private String tipo;
 
     public ErroDoSistema(HttpStatus status, String tipo, String mensagem) {

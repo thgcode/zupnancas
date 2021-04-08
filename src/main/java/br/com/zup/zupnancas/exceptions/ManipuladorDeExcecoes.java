@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -31,5 +32,10 @@ public class ManipuladorDeExcecoes extends ResponseEntityExceptionHandler {
         ErroDTO dto = new ErroDTO(status, "validação", erros);
 
         return ResponseEntity.status(status).body(dto);
+    }
+
+    @ExceptionHandler({ErroDoSistema.class})
+    protected ResponseEntity <Object> lidaComErrosDoSistema(ErroDoSistema erro) {
+        return ResponseEntity.status(erro.getStatus()).body(new ErroDTO(erro.getStatus(), erro.getTipo(), erro.getMessage()));
     }
 }
