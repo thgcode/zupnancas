@@ -61,4 +61,12 @@ public class Credito {
     public void setDataDeEntrada(LocalDate dataDeEntrada) {
         this.dataDeEntrada = dataDeEntrada;
     }
+
+    public List<CategoriaCredito> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<CategoriaCredito> categorias) {
+        this.categorias = categorias;
+    }
 }
