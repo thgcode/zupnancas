@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "credito_categorias")
-public class CategoriaConta {
+public class CategoriaCredito {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -12,10 +12,10 @@ public class CategoriaConta {
     @Column(nullable = false)
     private String nome;
 
-    public CategoriaConta() {
+    public CategoriaCredito() {
     }
 
-    public CategoriaConta(int id, String nome) {
+    public CategoriaCredito(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }

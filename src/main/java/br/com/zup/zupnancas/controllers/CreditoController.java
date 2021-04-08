@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.controllers;
 
+import br.com.zup.zupnancas.dtos.AdicionarCategoriaNoCreditoDTO;
 import br.com.zup.zupnancas.dtos.CadastroDeCreditoDTO;
 import br.com.zup.zupnancas.models.Credito;
 import br.com.zup.zupnancas.services.CreditoService;
@@ -24,5 +25,15 @@ public class CreditoController {
     @GetMapping
     public Iterable <Credito> listarTodosOsCreditos() {
         return creditoService.listarTodosOsCreditos();
+    }
+
+    @PostMapping("categorias/")
+    public Credito adicionarCreditoNaCategoria(@Valid @RequestBody AdicionarCategoriaNoCreditoDTO dto) {
+        return creditoService.adicionarCreditoNaCategoria(dto.converterParaCredito(), dto.converterParaCategoria());
+    }
+
+    @GetMapping("categorias/{id}/")
+    public Iterable <Credito> listarCreditosPeloIdDaCategoria(@PathVariable int id) {
+        return creditoService.listarCreditosPeloIdDaCategoria(id);
     }
 }
