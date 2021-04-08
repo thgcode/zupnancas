@@ -3,8 +3,6 @@ package br.com.zup.zupnancas.dtos;
 import br.com.zup.zupnancas.enums.ContaStatusEnum;
 import br.com.zup.zupnancas.models.Conta;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 
@@ -12,16 +10,12 @@ public class AtualizacaoDeContaDTO {
     @Positive
     private int id;
 
-    @NotEmpty
     private String descricao;
 
-    @Positive
     private double valor;
 
-    @NotNull
     private LocalDate dataDeVencimento;
 
-    @NotNull
     private ContaStatusEnum status;
 
     public AtualizacaoDeContaDTO() {
@@ -52,6 +46,6 @@ public class AtualizacaoDeContaDTO {
     }
 
     public Conta converterParaConta() {
-        return new Conta(id, descricao, valor, null, dataDeVencimento, status)
+        return new Conta(id, descricao, valor, null, dataDeVencimento, status);
     }
 }
