@@ -1,6 +1,6 @@
 package br.com.zup.zupnancas.services;
 
-import br.com.zup.zupnancas.models.CategoriaConta;
+import br.com.zup.zupnancas.models.CategoriaCredito;
 import br.com.zup.zupnancas.repositories.CategoriaRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +12,11 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public CategoriaConta cadastrarCategoria(CategoriaConta categoria) {
+    public CategoriaCredito cadastrarCategoria(CategoriaCredito categoria) {
         return categoriaRepository.save(categoria);
     }
 
-    public Iterable <CategoriaConta> listarCategorias() {
+    public Iterable <CategoriaCredito> listarCategorias() {
         return categoriaRepository.findAll();
     }
 }

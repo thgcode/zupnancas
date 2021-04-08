@@ -1,7 +1,7 @@
 package br.com.zup.zupnancas.controllers;
 
 import br.com.zup.zupnancas.dtos.CadastrarCategoriaDTO;
-import br.com.zup.zupnancas.models.CategoriaConta;
+import br.com.zup.zupnancas.models.CategoriaCredito;
 import br.com.zup.zupnancas.services.CategoriaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +19,12 @@ public class CategoriaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CategoriaConta cadastrarCategoria(@Valid @RequestBody CadastrarCategoriaDTO dto) {
+    public CategoriaCredito cadastrarCategoria(@Valid @RequestBody CadastrarCategoriaDTO dto) {
         return categoriaService.cadastrarCategoria(dto.converterParaCategoriaConta());
     }
 
     @GetMapping
-    public Iterable <CategoriaConta> visualizarCategoriasCadastradas() {
+    public Iterable <CategoriaCredito> visualizarCategoriasCadastradas() {
         return categoriaService.listarCategorias();
     }
 }

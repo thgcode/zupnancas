@@ -1,6 +1,6 @@
 package br.com.zup.zupnancas.dtos;
 
-import br.com.zup.zupnancas.models.CategoriaConta;
+import br.com.zup.zupnancas.models.CategoriaCredito;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -23,7 +23,7 @@ public class CadastrarCategoriaDTO {
         this.nome = nome;
     }
 
-    public CategoriaConta converterParaCategoriaConta() {
-        return new CategoriaConta(0, nome);
+    public CategoriaCredito converterParaCategoriaConta() {
+        return new CategoriaCredito(0, nome);
     }
 }
