@@ -28,7 +28,6 @@ public class Conta {
 
     @JsonIgnore
     @ManyToOne
-    @Column(nullable = false)
     private Saldo saldo;
 
     public Conta() {
