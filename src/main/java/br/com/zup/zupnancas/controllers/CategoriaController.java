@@ -27,4 +27,15 @@ public class CategoriaController {
     public Iterable <CategoriaCredito> visualizarCategoriasCadastradas() {
         return categoriaService.listarCategorias();
     }
+
+    @DeleteMapping("{id}/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removerCategoriaPeloId(@PathVariable int id) {
+        categoriaService.removerCategoriaPeloId(id);
+    }
+
+    @GetMapping("{id}/")
+    public void pesquisarCategoriaPeloId(@PathVariable int id) {
+        categoriaService.pesquisarCategoriaPeloId(id);
+    }
 }
