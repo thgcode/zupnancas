@@ -12,16 +12,21 @@ import java.util.Optional;
 @Service
 public class CreditoService {
     private CreditoRepository creditoRepository;
+    private SaldoService saldoService;
     private CategoriaService categoriaService;
 
-    public CreditoService(CreditoRepository creditoRepository, CategoriaService categoriaService) {
+    public CreditoService(CreditoRepository creditoRepository, SaldoService saldoService, CategoriaService categoriaService) {
         this.creditoRepository = creditoRepository;
+        this.saldoService = saldoService;
         this.categoriaService = categoriaService;
     }
 
     public Credito cadastrarCredito(Credito credito) {
         credito.setDataDeEntrada(LocalDate.now());
-        return creditoRepository.save(credito);
+
+        Credito creditoDoBanco = creditoRepository.save(credito);
+        saldoService.creditar(creditoDoBanco.getSaldo().getCpf(), creditoDoBanco);
+        return creditoDoBanco;
     }
 
     public Iterable <Credito> listarTodosOsCreditos() {
