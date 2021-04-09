@@ -31,5 +31,11 @@ public class CategoriaService {
         }
 
         throw new CategoriaNaoEncontradaException();
-        }
+    }
+
+    public void removerCategoriaPeloId(int id) {
+        pesquisarCategoriaPeloId(id);
+
+        categoriaRepository.deleteById(id);
+    }
 }
