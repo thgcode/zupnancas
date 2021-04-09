@@ -26,7 +26,7 @@ public class SaldoService {
         return saldoRepository.findAll();
     }
 
-    public void pesquisarSaldoPeloCpf(String cpf) {
+    public Saldo pesquisarSaldoPeloCpf(String cpf) {
         Optional <Saldo> optionalSaldo = saldoRepository.findById(cpf);
 
         if (optionalSaldo.isPresent()) {
@@ -37,8 +37,6 @@ public class SaldoService {
     }
 
     private void validarSePodePagarConta(Conta conta, Saldo saldo) {
-        Saldo saldo = pesquisarSaldoPeloCpf(conta.getSaldo().getCpf());
-
         double dinheiroDisponivel = saldo.getValor() + saldo.getLimite();
 
         if (conta.getValor() > dinheiroDisponivel) {
@@ -56,7 +54,7 @@ public class SaldoService {
         return saldoRepository.save(saldo);
     }
 
-    public void creditar(String cpf, Credito credito) {
+    public Saldo creditar(String cpf, Credito credito) {
         Saldo saldo = pesquisarSaldoPeloCpf(cpf);
 
         saldo.setValor(saldo.getValor() + credito.getValor());
