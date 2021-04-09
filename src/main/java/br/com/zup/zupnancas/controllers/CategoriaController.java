@@ -33,4 +33,9 @@ public class CategoriaController {
     public void removerCategoriaPeloId(@PathVariable int id) {
         categoriaService.removerCategoriaPeloId(id);
     }
+
+    @GetMapping("{id}/")
+    public void pesquisarCategoriaPeloId(@PathVariable int id) {
+        categoriaService.pesquisarCategoriaPeloId(id);
+    }
 }
