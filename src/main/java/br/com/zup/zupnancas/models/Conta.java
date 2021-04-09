@@ -1,6 +1,7 @@
 package br.com.zup.zupnancas.models;
 
 import br.com.zup.zupnancas.enums.ContaStatusEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,22 +17,31 @@ public class Conta {
 
     private double valor;
 
+    @Column(nullable = false)
     private LocalDate dataEntrada;
 
+    @Column(nullable = false)
     private LocalDate dataVencimento;
 
+    @Column(nullable = false)
     private ContaStatusEnum status;
+
+    @JsonIgnore
+    @ManyToOne
+    @Column(nullable = false)
+    private Saldo saldo;
 
     public Conta() {
     }
 
-    public Conta(int id, String descricao, double valor, LocalDate dataEntrada, LocalDate dataVencimento, ContaStatusEnum status) {
+    public Conta(int id, String descricao, double valor, LocalDate dataEntrada, LocalDate dataVencimento, ContaStatusEnum status, Saldo saldo) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.dataEntrada = dataEntrada;
         this.dataVencimento = dataVencimento;
         this.status = status;
+        this.saldo = saldo;
     }
 
     public int getId() {
@@ -80,5 +90,13 @@ public class Conta {
 
     public void setStatus(ContaStatusEnum status) {
         this.status = status;
+    }
+
+    public Saldo getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Saldo saldo) {
+        this.saldo = saldo;
     }
 }

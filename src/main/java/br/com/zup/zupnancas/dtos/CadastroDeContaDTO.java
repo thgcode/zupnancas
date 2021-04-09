@@ -1,6 +1,8 @@
 package br.com.zup.zupnancas.dtos;
 
 import br.com.zup.zupnancas.models.Conta;
+import br.com.zup.zupnancas.models.Saldo;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,13 +19,18 @@ public class CadastroDeContaDTO {
     @NotNull
     private LocalDate dataDeVencimento;
 
+    @CPF
+    @NotEmpty
+    private String cpf;
+
     public  CadastroDeContaDTO() {
     }
 
-    public CadastroDeContaDTO(@NotEmpty String descricao, @Positive double valor, @NotNull LocalDate dataDeVencimento) {
+    public CadastroDeContaDTO(@NotEmpty String descricao, @Positive double valor, @NotNull LocalDate dataDeVencimento, @CPF @NotEmpty String cpf) {
         this.descricao = descricao;
         this.valor = valor;
         this.dataDeVencimento = dataDeVencimento;
+        this.cpf = cpf;
     }
 
     public String getDescricao() {
@@ -50,7 +57,16 @@ public class CadastroDeContaDTO {
         this.dataDeVencimento = dataDeVencimento;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public Conta converterParaConta() {
-        return new Conta(0, descricao, 0.0, null, dataDeVencimento, null);
+        Saldo saldo = new Saldo(cpf, 0.0);
+        return new Conta(0, descricao, 0.0, null, dataDeVencimento, null, saldo);
     }
 }
