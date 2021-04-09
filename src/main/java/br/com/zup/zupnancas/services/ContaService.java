@@ -6,6 +6,7 @@ import br.com.zup.zupnancas.models.Saldo;
 import br.com.zup.zupnancas.repositories.ContaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,7 @@ public class ContaService {
     public Conta cadastrarConta(Conta conta) {
         saldoService.pesquisarSaldoPeloCpf(conta.getSaldo().getCpf());
 
+        conta.setDataEntrada(LocalDate.now());
         return contaRepository.save(conta);
     }
 
