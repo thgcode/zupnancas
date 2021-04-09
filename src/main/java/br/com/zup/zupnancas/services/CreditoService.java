@@ -22,6 +22,8 @@ public class CreditoService {
     }
 
     public Credito cadastrarCredito(Credito credito) {
+        saldoService.pesquisarSaldoPeloCpf(credito.getSaldo().getCpf());
+
         credito.setDataDeEntrada(LocalDate.now());
 
         Credito creditoDoBanco = creditoRepository.save(credito);

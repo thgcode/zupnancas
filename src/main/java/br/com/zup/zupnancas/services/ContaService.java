@@ -18,6 +18,8 @@ public class ContaService {
     }
 
     public Conta cadastrarConta(Conta conta) {
+        saldoService.pesquisarSaldoPeloCpf(conta.getSaldo().getCpf());
+
         return contaRepository.save(conta);
     }
 
