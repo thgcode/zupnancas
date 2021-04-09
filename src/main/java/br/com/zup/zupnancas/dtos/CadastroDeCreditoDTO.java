@@ -1,6 +1,8 @@
 package br.com.zup.zupnancas.dtos;
 
 import br.com.zup.zupnancas.models.Credito;
+import br.com.zup.zupnancas.models.Saldo;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
@@ -11,6 +13,10 @@ public class CadastroDeCreditoDTO {
 
     @Positive
     private double valor;
+
+    @NotEmpty
+    @CPF
+    private String cpf;
 
     public CadastroDeCreditoDTO() {
     }
@@ -36,7 +42,16 @@ public class CadastroDeCreditoDTO {
         this.valor = valor;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public Credito converterParaCredito() {
-        return new Credito(0, descricao, valor, null);
+        Saldo saldo = new Saldo(cpf, 0.0);
+        return new Credito(0, descricao, valor, null, saldo);
     }
 }

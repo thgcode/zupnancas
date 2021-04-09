@@ -2,6 +2,7 @@ package br.com.zup.zupnancas.services;
 
 import br.com.zup.zupnancas.enums.ContaStatusEnum;
 import br.com.zup.zupnancas.models.Conta;
+import br.com.zup.zupnancas.models.Saldo;
 import br.com.zup.zupnancas.repositories.ContaRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 @Service
 public class ContaService {
     private ContaRepository contaRepository;
+    private SaldoService saldoService;
 
     public ContaService(ContaRepository contaRepository) {
         this.contaRepository = contaRepository;
@@ -33,6 +35,14 @@ public class ContaService {
         return contaRepository.findAllByStatus(status);
     }
 
+    private Saldo pagarContaSeNecessario(Conta conta) {
+        if (conta.getStatus().equals(ContaStatusEnum.PAGO)) {
+            return saldoService.pagar(conta.getSaldo().getCpf(), conta);
+        }
+
+        return null;
+    }
+
     public Conta atualizarConta(Conta conta) {
         Conta contaDoBanco = pesquisarContaPeloId(conta.getId());
 
@@ -49,6 +59,7 @@ public class ContaService {
         }
 
         if (conta.getStatus() != null) {
+            pagarContaSeNecessario(contaDoBanco);
             contaDoBanco.setStatus(conta.getStatus());
         }
 

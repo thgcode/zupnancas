@@ -1,5 +1,7 @@
 package br.com.zup.zupnancas.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -11,23 +13,30 @@ public class Credito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private String descricao;
 
     private double valor;
 
+    @Column(nullable = false)
     private LocalDate dataDeEntrada;
 
     @ManyToMany
     private List <CategoriaCredito> categorias;
 
+    @ManyToOne
+    @JsonIgnore
+    private Saldo saldo;
+
     public Credito() {
     }
 
-    public Credito(int id, String descricao, double valor, LocalDate dataDeEntrada) {
+    public Credito(int id, String descricao, double valor, LocalDate dataDeEntrada, Saldo saldo) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
         this.dataDeEntrada = dataDeEntrada;
+        this.saldo = saldo;
     }
 
     public int getId() {
@@ -68,5 +77,13 @@ public class Credito {
 
     public void setCategorias(List<CategoriaCredito> categorias) {
         this.categorias = categorias;
+    }
+
+    public Saldo getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Saldo saldo) {
+        this.saldo = saldo;
     }
 }

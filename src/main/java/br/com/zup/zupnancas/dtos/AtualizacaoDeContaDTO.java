@@ -46,6 +46,6 @@ public class AtualizacaoDeContaDTO {
     }
 
     public Conta converterParaConta() {
-        return new Conta(id, descricao, valor, null, dataDeVencimento, status);
+        return new Conta(id, descricao, valor, null, dataDeVencimento, status, null);
     }
 }
