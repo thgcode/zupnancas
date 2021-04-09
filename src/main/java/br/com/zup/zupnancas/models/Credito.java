@@ -1,5 +1,7 @@
 package br.com.zup.zupnancas.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,6 +25,7 @@ public class Credito {
     private List <CategoriaCredito> categorias;
 
     @ManyToOne
+    @JsonIgnore
     private Saldo saldo;
 
     public Credito() {
