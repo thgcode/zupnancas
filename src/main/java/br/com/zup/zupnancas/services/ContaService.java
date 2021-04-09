@@ -1,6 +1,7 @@
 package br.com.zup.zupnancas.services;
 
 import br.com.zup.zupnancas.enums.ContaStatusEnum;
+import br.com.zup.zupnancas.exceptions.ContaNaoPodeEntrarComoPagaException;
 import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.models.Saldo;
 import br.com.zup.zupnancas.repositories.ContaRepository;
@@ -18,10 +19,23 @@ public class ContaService {
         this.contaRepository = contaRepository;
     }
 
+    public void acertarStatusParaNovaConta(Conta conta) {
+        if (conta.getStatus().equals(ContaStatusEnum.PAGO)) {
+            throw new ContaNaoPodeEntrarComoPagaException();
+        }
+
+        if (conta.getStatus().equals(ContaStatusEnum.AGUARDANDO) && conta.getDataVencimento().isBefore(LocalDate.now())) {
+            conta.setStatus(ContaStatusEnum.ATRASADO);
+        }
+    }
+
     public Conta cadastrarConta(Conta conta) {
         saldoService.pesquisarSaldoPeloCpf(conta.getSaldo().getCpf());
 
         conta.setDataEntrada(LocalDate.now());
+
+        acertarStatusParaNovaConta(conta);
+        
         return contaRepository.save(conta);
     }
 
