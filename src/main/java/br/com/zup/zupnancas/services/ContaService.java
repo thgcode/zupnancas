@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.services;
 
+import br.com.zup.zupnancas.enums.ContaStatusEnum;
 import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.repositories.ContaRepository;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,10 @@ public class ContaService {
         return null; // Refatorar depois com a exceção
     }
 
+    public Iterable <Conta> listarContasPeloStatus(ContaStatusEnum status) {
+        return contaRepository.findAllByStatus(status);
+    }
+
     public Conta atualizarConta(Conta conta) {
         Conta contaDoBanco = pesquisarContaPeloId(conta.getId());
 
@@ -49,6 +54,7 @@ public class ContaService {
 
         return contaRepository.save(contaDoBanco);
     }
+
     public Iterable <Conta> listarTodasAsContas() {
         return contaRepository.findAll();
     }
