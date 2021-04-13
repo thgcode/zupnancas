@@ -15,8 +15,9 @@ public class ContaService {
     private ContaRepository contaRepository;
     private SaldoService saldoService;
 
-    public ContaService(ContaRepository contaRepository) {
+    public ContaService(ContaRepository contaRepository, SaldoService saldoService) {
         this.contaRepository = contaRepository;
+        this.saldoService = saldoService;
     }
 
     public void acertarStatusParaNovaConta(Conta conta) {
