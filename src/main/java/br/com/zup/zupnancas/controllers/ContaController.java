@@ -25,6 +25,11 @@ public class ContaController {
         return contaService.cadastrarConta(dto.converterParaConta());
     }
 
+    @GetMapping
+    public Iterable <Conta> listarTodasAsContas() {
+        return contaService.listarTodasAsContas();
+    }
+
     @GetMapping("{status}/")
     public Iterable <Conta> listarContasPeloStatus(@PathVariable String status) {
         if (status != null || status.isEmpty()) {

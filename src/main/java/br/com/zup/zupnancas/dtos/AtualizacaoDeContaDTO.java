@@ -21,6 +21,14 @@ public class AtualizacaoDeContaDTO {
     public AtualizacaoDeContaDTO() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -43,6 +51,14 @@ public class AtualizacaoDeContaDTO {
 
     public void setDataDeVencimento(LocalDate dataDeVencimento) {
         this.dataDeVencimento = dataDeVencimento;
+    }
+
+    public ContaStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(ContaStatusEnum status) {
+        this.status = status;
     }
 
     public Conta converterParaConta() {
