@@ -22,4 +22,9 @@ public class SaldoController {
     public Saldo cadastrarSaldo(@Valid @RequestBody CadastroDeSaldoDTO dto) {
         return saldoService.cadastrarSaldo(dto.converterParaSaldo());
     }
+
+    @GetMapping("{cpf}/")
+    public Saldo pesquisarSaldoPeloCpf(@PathVariable String cpf) {
+        return saldoService.pesquisarSaldoPeloCpf(cpf);
+    }
 }
