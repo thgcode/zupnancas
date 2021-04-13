@@ -27,4 +27,9 @@ public class SaldoController {
     public Saldo pesquisarSaldoPeloCpf(@PathVariable String cpf) {
         return saldoService.pesquisarSaldoPeloCpf(cpf);
     }
+
+    @GetMapping
+    public Iterable <Saldo> listarTodosOsSaldos() {
+        return saldoService.listarTodosOsSaldos();
+    }
 }
