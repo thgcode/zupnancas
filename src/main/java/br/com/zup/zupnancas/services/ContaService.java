@@ -21,6 +21,10 @@ public class ContaService {
     }
 
     public void acertarStatusParaNovaConta(Conta conta) {
+        if (conta.getStatus() == null) {
+            conta.setStatus(ContaStatusEnum.AGUARDANDO);
+        }
+
         if (conta.getStatus().equals(ContaStatusEnum.PAGO)) {
             throw new ContaNaoPodeEntrarComoPagaException();
         }
