@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.Arrays;
+import java.util.List;
+
 @SpringBootTest
 public class SaldoServiceTests {
     @Autowired
@@ -32,5 +35,22 @@ public class SaldoServiceTests {
         Saldo saldoDoServico = saldoService.cadastrarSaldo(saldoDeTeste);
 
         Assertions.assertEquals(saldoDoServico, saldoDoServico);
+    }
+
+    @Test
+    public void testarListarTodosOsSaldos() {
+        List <Saldo> resultados = Arrays.asList(saldoDeTeste);
+
+        Mockito.when(saldoRepository.findAll()).thenReturn(resultados);
+
+        Iterable <Saldo> resultadosDoServico = saldoService.listarTodosOsSaldos();
+
+        int contador = 0;
+
+        for (Saldo saldo : resultadosDoServico) {
+            contador ++;
+        }
+
+        Assertions.assertEquals(1, contador);
     }
     }
