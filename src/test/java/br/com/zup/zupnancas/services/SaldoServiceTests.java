@@ -1,6 +1,7 @@
 package br.com.zup.zupnancas.services;
 
 import br.com.zup.zupnancas.enums.ContaStatusEnum;
+import br.com.zup.zupnancas.exceptions.SaldoInsuficienteException;
 import br.com.zup.zupnancas.exceptions.SaldoNaoEncontradoException;
 import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.models.Saldo;
@@ -8,7 +9,6 @@ import br.com.zup.zupnancas.repositories.SaldoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -91,5 +91,18 @@ public class SaldoServiceTests {
         saldoService.pagar(saldoDeTeste.getCpf(), conta);
 
         Assertions.assertEquals(500.0, saldoDeTeste.getValor(), 0.001);
+    }
+
+    @Test
+    public void testarPagarContaComSaldoInsuficiente() {
+        Optional<Saldo> optionalSaldo = Optional.of(saldoDeTeste);
+        Mockito.when(saldoRepository.findById(Mockito.anyString())).thenReturn(optionalSaldo);
+        Mockito.when(saldoRepository.save(Mockito.any(Saldo.class))).thenReturn(saldoDeTeste);
+
+        Conta conta = new Conta(1, "Teste", 1001, LocalDate.now(), LocalDate.now(), ContaStatusEnum.AGUARDANDO, saldoDeTeste);
+
+        Assertions.assertThrows(SaldoInsuficienteException.class, () -> {
+            saldoService.pagar(saldoDeTeste.getCpf(), conta);
+        });
     }
 }
