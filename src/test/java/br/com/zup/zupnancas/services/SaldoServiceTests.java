@@ -4,6 +4,7 @@ import br.com.zup.zupnancas.enums.ContaStatusEnum;
 import br.com.zup.zupnancas.exceptions.SaldoInsuficienteException;
 import br.com.zup.zupnancas.exceptions.SaldoNaoEncontradoException;
 import br.com.zup.zupnancas.models.Conta;
+import br.com.zup.zupnancas.models.Credito;
 import br.com.zup.zupnancas.models.Saldo;
 import br.com.zup.zupnancas.repositories.SaldoRepository;
 import org.junit.jupiter.api.Assertions;
@@ -99,10 +100,24 @@ public class SaldoServiceTests {
         Mockito.when(saldoRepository.findById(Mockito.anyString())).thenReturn(optionalSaldo);
         Mockito.when(saldoRepository.save(Mockito.any(Saldo.class))).thenReturn(saldoDeTeste);
 
-        Conta conta = new Conta(1, "Teste", 1001, LocalDate.now(), LocalDate.now(), ContaStatusEnum.AGUARDANDO, saldoDeTeste);
+        Conta conta = new Conta(1, "Teste", 1001.0, LocalDate.now(), LocalDate.now(), ContaStatusEnum.AGUARDANDO, saldoDeTeste);
 
         Assertions.assertThrows(SaldoInsuficienteException.class, () -> {
             saldoService.pagar(saldoDeTeste.getCpf(), conta);
         });
+    }
+
+    @Test
+    public void testarCreditarNaConta() {
+        Optional<Saldo> optionalSaldo = Optional.of(saldoDeTeste);
+        Mockito.when(saldoRepository.findById(Mockito.anyString())).thenReturn(optionalSaldo);
+        Mockito.when(saldoRepository.save(Mockito.any(Saldo.class))).thenReturn(saldoDeTeste);
+
+        Credito credito = new Credito(1, "Teste", 500.0, LocalDate.now(), saldoDeTeste);
+
+        saldoDeTeste.setValor(1000.0);
+        saldoService.creditar(saldoDeTeste.getCpf(), credito);
+
+        Assertions.assertEquals(1500.0, saldoDeTeste.getValor(), 0.001);
     }
 }
