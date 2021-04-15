@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.services;
 
+import br.com.zup.zupnancas.exceptions.SaldoNaoEncontradoException;
 import br.com.zup.zupnancas.models.Saldo;
 import br.com.zup.zupnancas.repositories.SaldoRepository;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class SaldoServiceTests {
@@ -39,18 +41,37 @@ public class SaldoServiceTests {
 
     @Test
     public void testarListarTodosOsSaldos() {
-        List <Saldo> resultados = Arrays.asList(saldoDeTeste);
+        List<Saldo> resultados = Arrays.asList(saldoDeTeste);
 
         Mockito.when(saldoRepository.findAll()).thenReturn(resultados);
 
-        Iterable <Saldo> resultadosDoServico = saldoService.listarTodosOsSaldos();
+        Iterable<Saldo> resultadosDoServico = saldoService.listarTodosOsSaldos();
 
         int contador = 0;
 
         for (Saldo saldo : resultadosDoServico) {
-            contador ++;
+            contador++;
         }
 
         Assertions.assertEquals(1, contador);
     }
+
+    @Test
+    public void testarPesquisarPeloCPF() {
+        Optional<Saldo> optionalSaldo = Optional.of(saldoDeTeste);
+        Mockito.when(saldoRepository.findById(Mockito.anyString())).thenReturn(optionalSaldo);
+
+        Saldo saldoDoServico = saldoService.pesquisarSaldoPeloCpf(saldoDeTeste.getCpf());
+
+        Assertions.assertSame(saldoDeTeste, saldoDoServico);
     }
+
+    @Test
+    public void testarPesquisarCPFComErro() {
+        Mockito.when(saldoRepository.findById(Mockito.anyString())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(SaldoNaoEncontradoException.class, () -> {
+            saldoService.pesquisarSaldoPeloCpf(saldoDeTeste.getCpf());
+        });
+    }
+}
