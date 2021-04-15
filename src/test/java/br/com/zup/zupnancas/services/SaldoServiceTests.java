@@ -36,12 +36,12 @@ public class SaldoServiceTests {
     }
 
     @Test
-    public void testarCadastroDeSaldo() {
+    public void testarCadastrarDeSaldo() {
         Mockito.when(saldoRepository.save(Mockito.any(Saldo.class))).thenReturn(saldoDeTeste);
 
         Saldo saldoDoServico = saldoService.cadastrarSaldo(saldoDeTeste);
 
-        Assertions.assertEquals(saldoDoServico, saldoDoServico);
+        Assertions.assertEquals(saldoDeTeste, saldoDoServico);
     }
 
     @Test
